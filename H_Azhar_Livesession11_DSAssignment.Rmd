@@ -1,0 +1,30 @@
+---
+title: "UK Cars"
+author: "Hassan Azhar"
+date: "November 20, 2016"
+output: html_document
+---
+
+```{r cars}
+library(fpp) 
+data(ukcars)
+plot(ukcars)
+
+
+fitd <- decompose(ukcars)
+plot(fitd)
+
+fit <- stl(ukcars, s.window=5)
+plot(fit)
+
+eeadj <- seasadj(fitd)
+plot(eeadj)
+
+ukcar2 <- ts(c(ukcars[1:54],ukcars[55]+500,ukcars[56:113]),start=c(1996,1),frequency=12)
+plot(ukcar2)
+
+plot(ukcars, col="gray",
+     main="UK Cars",
+     ylab="Car", xlab="")
+lines(fit$time.series[,2],col="red",ylab="Trend")
+```
